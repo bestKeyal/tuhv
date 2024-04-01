@@ -441,7 +441,7 @@ if __name__ == "__main__":
                     epochs              = end_epoch,
                     initial_epoch       = start_epoch,
                     # use_multiprocessing = True if num_workers > 1 else False,
-                    workers             = num_workers,
+                    # workers             = num_workers,
                     callbacks           = callbacks
                 )
             #---------------------------------------#
@@ -493,6 +493,6 @@ if __name__ == "__main__":
                     epochs              = end_epoch,
                     initial_epoch       = start_epoch,
                     # use_multiprocessing = True if num_workers > 1 else False,
-                    workers             = num_workers,
+                    # workers             = num_workers,
                     callbacks           = callbacks
                 )
