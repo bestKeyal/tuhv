@@ -424,15 +424,18 @@ if __name__ == "__main__":
             log_dir         = os.path.join(save_dir, "loss_" + str(time_str))
             logging         = TensorBoard(log_dir)
             loss_history    = LossHistory(log_dir, val_loss_flag=False)
-            checkpoint      = ModelCheckpoint(os.path.join(save_dir, "ep{epoch:03d}-loss{loss:.3f}.h5"), 
+            """
+            .weights.h5结尾
+            """
+            checkpoint      = ModelCheckpoint(os.path.join(save_dir, "ep{epoch:03d}-loss{loss:.3f}.weights.h5"),
                                     monitor = 'loss', save_weights_only = True, save_best_only = False, period = save_period)
             """
             
             原本以_weights.h5结尾
             为了适配，现在以.weights.h5结尾
             """
-            
-            checkpoint_last = ModelCheckpoint(os.path.join(save_dir, "last_epoch.weights.h5"), 
+
+            checkpoint_last = ModelCheckpoint(os.path.join(save_dir, "last_epoch.weights.h5"),
                                     monitor = 'loss', save_weights_only = True, save_best_only = False, period = 1)
             checkpoint_best = ModelCheckpoint(os.path.join(save_dir, "best_epoch.weights.h5"), 
                                     monitor = 'loss', save_weights_only = True, save_best_only = True, period = 1)
