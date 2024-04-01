@@ -331,8 +331,8 @@ if __name__ == "__main__":
         train_dataloader    = UnetDataset(train_lines, input_shape, batch_size, num_classes, True, VOCdevkit_path)
 
         optimizer = {
-            'adam'  : Adam(lr = Init_lr, beta_1 = momentum),
-            'sgd'   : SGD(lr = Init_lr, momentum = momentum, nesterov=True)
+            'adam'  : Adam(learning_rate = Init_lr, beta_1 = momentum),
+            'sgd'   : SGD(learning_rate = Init_lr, momentum = momentum, nesterov=True)
         }[optimizer_type]
         if eager:
             start_epoch     = Init_Epoch
