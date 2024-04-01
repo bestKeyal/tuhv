@@ -431,6 +431,7 @@ if __name__ == "__main__":
             原本以_weights.h5结尾
             为了适配，现在以.weights.h5结尾
             """
+            
             checkpoint_last = ModelCheckpoint(os.path.join(save_dir, "last_epoch.weights.h5"), 
                                     monitor = 'loss', save_weights_only = True, save_best_only = False, period = 1)
             checkpoint_best = ModelCheckpoint(os.path.join(save_dir, "best_epoch.weights.h5"), 
