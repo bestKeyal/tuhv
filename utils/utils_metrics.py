@@ -22,16 +22,22 @@ def Iou_score(smooth = 1e-5, threhold = 0.5):
 
 def f_score(beta=1, smooth = 1e-5, threhold = 0.5):
     def _f_score(y_true, y_pred):
+        # 将预测值二值化
         y_pred = backend.greater(y_pred, threhold)
         y_pred = backend.cast(y_pred, backend.floatx())
 
-        tp = backend.sum(y_true[...,:-1] * y_pred, axis=[0,1,2])
-        fp = backend.sum(y_pred         , axis=[0,1,2]) - tp
-        fn = backend.sum(y_true[...,:-1], axis=[0,1,2]) - tp
+        # 确保 y_true 也是同样的数据类型
+        y_true_processed = backend.cast(y_true[..., :-1], backend.floatx())
+
+        # 然后进行操作
+        tp = backend.sum(y_true_processed * y_pred, axis=[0, 1, 2])
+        fp = backend.sum(y_pred, axis=[0, 1, 2]) - tp
+        fn = backend.sum(y_true_processed, axis=[0, 1, 2]) - tp
 
         score = ((1 + beta ** 2) * tp + smooth) \
                 / ((1 + beta ** 2) * tp + beta ** 2 * fn + fp + smooth)
         return score
+
     return _f_score
 
 # 设标签宽W，长H
