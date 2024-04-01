@@ -141,7 +141,7 @@ if __name__ == "__main__":
     #   UnFreeze_Epoch          模型总共训练的epoch
     #   Unfreeze_batch_size     模型在解冻后的batch_size
     #------------------------------------------------------------------#
-    UnFreeze_Epoch      = 100
+    UnFreeze_Epoch      = 50
     Unfreeze_batch_size = 32
     #------------------------------------------------------------------#
     #   Freeze_Train    是否进行冻结训练
@@ -214,13 +214,12 @@ if __name__ == "__main__":
     #------------------------------------------------------#
     #   设置用到的显卡
     #------------------------------------------------------#
-    os.environ["CUDA_VISIBLE_DEVICES"]  = ','.join(str(x) for x in train_gpu)
-    ngpus_per_node                      = len(train_gpu)
-    
-    gpus = tf.config.experimental.list_physical_devices(device_type='GPU')
-    for gpu in gpus:
-        print(gpu)
-        tf.config.experimental.set_memory_growth(gpu, True)
+    # os.environ["CUDA_VISIBLE_DEVICES"]  = ','.join(str(x) for x in train_gpu)
+    # ngpus_per_node                      = len(train_gpu)
+    #
+    # gpus = tf.config.experimental.list_physical_devices(device_type='GPU')
+    # for gpu in gpus:
+    #     tf.config.experimental.set_memory_growth(gpu, True)
     
     #------------------------------------------------------#
     #   判断当前使用的GPU数量与机器上实际的GPU数量
@@ -233,7 +232,8 @@ if __name__ == "__main__":
     else:
         strategy = None
     print('Number of devices: {}'.format(ngpus_per_node))
-    
+    print(gpus)
+
     if ngpus_per_node > 1:
         with strategy.scope():
             #------------------------------------------------------#
