@@ -219,6 +219,7 @@ if __name__ == "__main__":
     
     gpus = tf.config.experimental.list_physical_devices(device_type='GPU')
     for gpu in gpus:
+        print(gpu)
         tf.config.experimental.set_memory_growth(gpu, True)
     
     #------------------------------------------------------#
@@ -439,7 +440,7 @@ if __name__ == "__main__":
                     steps_per_epoch     = epoch_step,
                     epochs              = end_epoch,
                     initial_epoch       = start_epoch,
-                    use_multiprocessing = True if num_workers > 1 else False,
+                    # use_multiprocessing = True if num_workers > 1 else False,
                     workers             = num_workers,
                     callbacks           = callbacks
                 )
@@ -491,7 +492,7 @@ if __name__ == "__main__":
                     steps_per_epoch     = epoch_step,
                     epochs              = end_epoch,
                     initial_epoch       = start_epoch,
-                    use_multiprocessing = True if num_workers > 1 else False,
+                    # use_multiprocessing = True if num_workers > 1 else False,
                     workers             = num_workers,
                     callbacks           = callbacks
                 )
